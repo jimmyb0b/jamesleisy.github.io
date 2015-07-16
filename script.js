@@ -41,7 +41,26 @@ var shuffleDeck = []
 randomizedDeck()
 
 
+var playerHand = []
+var dealerHand = []
+
+var dealCards = function(){
+			for (i=0; i<2; i++){
+			playerHand.push(this.shuffleDeck[i])
+				shuffleDeck.shift()
+			dealerHand.push(this.shuffleDeck[i])
+				shuffleDeck.shift()
+		}
+		console.log(playerHand)
+		console.log(dealerHand)
+		console.log(shuffleDeck)
+	}
+dealCards()
 
 
-//.shift
-//.pop
+
+
+
+
+
+
