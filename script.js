@@ -15,16 +15,6 @@ this.cardValue = cardValue;
 }
 
 
-// var deckImg = []
-// var assignCardImages = function(){
-// 	for (i=0;i<cardImg.length; i++)
-// 		deckImg.push(new Card())
-//"playing_cards/"+
-//}
-
-//deck.push(cardImg(deckImg))
-//assignCardImages()
-
 var deck = []
 	var createCards = function(){
 
@@ -34,9 +24,8 @@ var deck = []
 					deck.push(new Card(cardSuits[i],cardNumbers[o],('playing_cards/'+cardImg[i+4*o]),(cardValue[i+4*o])))
 				}
 			}
-			console.log(deck)
+//			console.log(deck)
 		}
-
 createCards()
 
 
@@ -85,21 +74,22 @@ var Game = function(){
 	}
 }
 
-
 var game = new Game(shuffleDeck,playerHand,dealerHand)
 game.render()
+
 
 
 
 var playerScore = function(playerHand){
 	var score = 0
 	for (i=0; i< playerHand.length;i++){
-		score+=(parseInt(this.Card[i].cardNumbers))
-		if (playerHand.contains("A") && score >21){
-			Card[i].cardValue = 1
-	}
+		score+=(parseInt(playerHand[i].cardValue))
+//		if (playerHand.contains.cardNumbers("A") && score >21){
+//			playerHand[i].cardValue = 1
+//	}
 }
-	console.log(playerScore)
+	console.log(score)
+	return score
 }
 playerScore(playerHand)
 
@@ -107,14 +97,19 @@ playerScore(playerHand)
 var dealerScore = function(dealerHand){
 	var score = 0
 	for (i=0; i< dealerHand.length;i++){
-		score+=(parseInt(this.Card[i].cardNumbers))
-		if (dealerHand.contains("A") && score >21){
-			Card[i].cardValue = 1
-	}
+		score+=(parseInt(dealerHand[i].cardValue))
+//		if (dealerHand.contains("A") && score >21){
+//			dealerHand[i].cardValue = 1
+//	}
 }
-	console.log(dealerScore)
+	console.log(score)
+	return score
 }
 dealerScore(dealerHand)
+
+var winner = function(){
+	
+}
 
 
 
