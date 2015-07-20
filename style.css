@@ -1,34 +1,173 @@
 .container{
-	width: 1250px;
-	height: 900px;
-	background-color: white;
+	width: 1000px;
+	height: 650px;
+	background-image: url('https://mxg.cdnbf.net/mexchangeblackjack/turbo/assets/gameView/tableBackground.png?v1.26-210');
+	background-repeat: no-repeat;
 }
 
 .card-deck{
-	width: 150px;
-	height: 225px;
+	width: 100px;
+	height: 175px;
 	display: inline-block;
 	margin: 10px;
 	vertical-align:top;
+	top: 50px;
+	left: 50px;
 	text-align: center;
 }
 
 .card-stack{
-	width: 100%;
 	height: 100%;
+	width: relative;
+	  -webkit-box-shadow: 
+        1px 1px   0 rgba(0,   0,   0,   0.100), 
+        3px 3px   0 rgba(255, 255, 255, 1.0), 
+        4px 4px   0 rgba(0,   0,   0,   0.125), 
+        6px 6px   0 rgba(255, 255, 255, 1.0),  
+        7px 7px   0 rgba(0,   0,   0,   0.150), 
+        9px 9px   0 rgba(255, 255, 255, 1.0),  
+        10px 10px 0 rgba(0,   0,   0,   0.175);
+  -moz-box-shadow: 
+        1px 1px   0 rgba(0,   0,   0,   0.100), 
+        3px 3px   0 rgba(255, 255, 255, 1.0), 
+        4px 4px   0 rgba(0,   0,   0,   0.125), 
+        6px 6px   0 rgba(255, 255, 255, 1.0),  
+        7px 7px   0 rgba(0,   0,   0,   0.150), 
+        9px 9px   0 rgba(255, 255, 255, 1.0),  
+        10px 10px 0 rgba(0,   0,   0,   0.175);
+  box-shadow: 
+        1px 1px   0 rgba(0,   0,   0,   0.100), 
+        3px 3px   0 rgba(255, 255, 255, 1.0), 
+        4px 4px   0 rgba(0,   0,   0,   0.125), 
+        6px 6px   0 rgba(255, 255, 255, 1.0),  
+        7px 7px   0 rgba(0,   0,   0,   0.150), 
+        9px 9px   0 rgba(255, 255, 255, 1.0),  
+        10px 10px 0 rgba(0,   0,   0,   0.175);
+    
+}
 }
 
 .deal-button{
-	background-color: silver;
-	color: black;
-	margin-top: 20px;
+  color: blue;
+  background-color: white;
+  width: 150px;
+}
+
+.deal-cards{
+  color: blue;
+  background-color: white;
+  width: 150px;	
+}
+
+.increase-bet{
+  color: blue;
+  background-color: white;
+  width: 150px;
+}
+
+.decrease-bet{
+  color: blue;
+  background-color: white;
+  width: 150px;
+}
+
+.hit-button{
+  color: blue;
+  background-color: white;
+  width: 150px;
+}
+
+.stay-button{
+  color: blue;
+  background-color: white;
+  width: 150px;
 }
 
 .dealer-hand{
+	display:inline-block;
+	margin:10px;
+    position: absolute;
+   	top: 0;
+    right: 200px;
+	height:175px; 
 
+}
+
+.dealer-cards{
+	height: 100%;
+	width: relative;
 }
 
 .player-hand{
-
+	display:inline-block;
+	margin:10px;
+	position: absolute;
+	bottom: 125px;
+    right: 200px;
+	height:175px;
 }
+
+.player-cards{
+	height: 100%;
+	width: relative;
+}
+
+.bank {
+	color: white;
+	margin: 10px;
+}
+
+.bet-value{
+	color:white;
+	margin: 10px;
+}
+
+.dealer-score{
+	color: white;
+	margin: 10px;
+}
+
+.player-score{
+	color: white;
+	margin: 10px;
+}
+
+#modal{
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: none;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.4);
+}
+
+#close{
+	float: right;
+	top: 0;
+	}
+
+.modal-content {
+  position: relative;
+  margin: 0 30%;
+  background-color: white;
+  top: 150px;
+  width: 40%;
+}
+
+.modal-header {
+  position: absolute;
+  background-color: white;
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
 
