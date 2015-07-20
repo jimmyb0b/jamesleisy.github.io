@@ -9,7 +9,7 @@
 	width: 100px;
 	height: 175px;
 	display: inline-block;
-	margin: 10px;
+	margin: 20px;
 	vertical-align:top;
 	top: 50px;
 	left: 50px;
@@ -51,44 +51,51 @@
   color: blue;
   background-color: white;
   width: 150px;
+  margin: 10px;
 }
 
 .deal-cards{
   color: blue;
   background-color: white;
   width: 150px;	
+  margin: 10px;
+
 }
 
 .increase-bet{
   color: blue;
   background-color: white;
   width: 150px;
+  margin: 10px;
 }
 
 .decrease-bet{
   color: blue;
   background-color: white;
   width: 150px;
+  margin: 10px;
 }
 
 .hit-button{
   color: blue;
   background-color: white;
   width: 150px;
+  margin: 10px;
 }
 
 .stay-button{
   color: blue;
   background-color: white;
   width: 150px;
+  margin: 10px;
 }
 
 .dealer-hand{
 	display:inline-block;
 	margin:10px;
     position: absolute;
-   	top: 0;
-    right: 200px;
+   	top: 75px;
+    right: 125px;
 	height:175px; 
 
 }
@@ -96,20 +103,22 @@
 .dealer-cards{
 	height: 100%;
 	width: relative;
+	margin: 5px
 }
 
 .player-hand{
 	display:inline-block;
 	margin:10px;
 	position: absolute;
-	bottom: 125px;
-    right: 200px;
+	bottom: 100px;
+    right: 125px;
 	height:175px;
 }
 
 .player-cards{
 	height: 100%;
 	width: relative;
+	margin: 5px
 }
 
 .bank {
@@ -125,18 +134,23 @@
 .dealer-score{
 	color: white;
 	margin: 10px;
+	position: absolute;
+	top: 200px;
+	right: 10px;
 }
 
 .player-score{
 	color: white;
 	margin: 10px;
+	position: absolute;
+	bottom: 200px;
+	right: 10px;
 }
 
-#modal{
+.modal{
 	top: 0;
 	left: 0;
 	position: fixed;
-	display: none;
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0,0,0,.4);
@@ -160,7 +174,9 @@
   background-color: white;
   width: 100%;
 }
-
+ .hidden{
+ 	display: none;
+ }
 
 
 

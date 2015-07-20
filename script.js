@@ -14,69 +14,76 @@ this.cardImg = cardImg;
 this.cardValue = cardValue;
 }
 
-
 var deck = []
-	var createCards = function(){
+var shuffleDeck = []
+var money = 1000
+var betValue = 0
+var playerHand = []
+var dealerHand = []
 
-			for (i=0; i < cardSuit.length; i++) {
-				for (o=0; o< cardNumber.length;o++){	
-	//				for (u=0; u<this.cardImg.length;u++){
-					deck.push(new Card(cardSuit[i],cardNumber[o],('playing_cards/'+cardImg[i+4*o]+'.png'),(cardValue[i+4*o])))
+$('.hit-button').prop('disabled', true)
+$('.stay-button').prop('disabled', true)
+
+
+$('.bet-value').text("Your bet is $"+ betValue)
+$('.bank').text("You have $"+money)
+
+
+var createCards = function(){
+		for (var i=0; i < cardSuit.length; i++) {
+			for (var o=0; o< cardNumber.length;o++){	
+				deck.push(new Card(cardSuit[i],cardNumber[o],('playing_cards/'+cardImg[i+4*o]+'.png'),(cardValue[i+4*o])))
 				}
 			}
-//			console.log(deck)
 		}
 createCards()
 
 
-var shuffleDeck = []
-	var randomizedDeck = function(){
-		for (i=0; i<deck.length; i++){
-				shuffling = Math.floor(Math.random()* this.deck.length)
-				shuffleDeck.push(deck[shuffling])
-			}		
+var randomizedDeck = function(){
+	for (var i=0; i<deck.length; i++){
+			shuffling = Math.floor(Math.random()* this.deck.length)
+			shuffleDeck.push(deck[shuffling])
+		}		
 //		console.log(shuffleDeck)
 	}
  randomizedDeck()
 
-var money = 1000
+// var money = 1000
 
-var account = function(money){
-//	for (i=0;i<parseInt(money);i++){
- 		$('.bank').text("You have $"+money)
-//	}
-}
-account(money)
+// var account = function(money){
+// //	for (i=0;i<parseInt(money);i++){
+//  		$('.bank').text("You have $"+money)
+// //	}
+// }
+// account(money)
 
-var betValue = 0
-var bet = function(){
-	$('.bet-value').text("Your bet is $"+ betValue)
 	$('.increase-bet').on('click', function(){
 			betValue += 10
 			money -= 10
+	$('.bank').text("You have $"+money)		
+	$('.bet-value').text("Your bet is $"+ betValue)
 	})
-	return betValue, money
-}
-bet()
-
 
 
 	$('.card-deck').append('<img class="card-stack" src="http://patentimages.storage.googleapis.com/USD490860S1/USD0490860-20040601-D00000.png">')
 
 
-var playerHand = []
-var dealerHand = []
 
 var dealCards = function(){
 		$('.deal-cards').on('click',function(){
-			for (i=0; i<1; i++){
-			playerHand.push(shuffleDeck[i])
+			$('.hit-button').prop('disabled', false)
+			$('.stay-button').prop('disabled', false)
+			$('.increase-bet').prop('disabled', true)
+			$('.decrease-bet').prop('disabled', true)
+//				var startDeal = 2
+//			for (var i=0; i<startDeal.length; i++){
+			playerHand.push(shuffleDeck[0])
 				shuffleDeck.shift()
-			dealerHand.push(shuffleDeck[i])
+			dealerHand.push(shuffleDeck[0])
 				shuffleDeck.shift()
-			playerHand.push(shuffleDeck[i])
+			playerHand.push(shuffleDeck[0])
 				shuffleDeck.shift()
-			dealerHand.push(shuffleDeck[i])
+			dealerHand.push(shuffleDeck[0])
 				shuffleDeck.shift()
 			$('.deal-cards').prop('disabled', true)
 			$('.increase-bet').prop('disabled', true)
@@ -84,7 +91,7 @@ var dealCards = function(){
 		$p = $('<p>').text("You have: "+playerScore())
 		$('.player-score').append($p)
 //dealer score count
-		$d = $('<p>').text("The dealer has: "+dealerScore())
+		$d = $('<p>').text("Dealer has: "+dealerScore())
 		$('.dealer-score').append($d)
 
 		if (playerScore === 21 && dealerScore === 21){
@@ -94,7 +101,7 @@ var dealCards = function(){
 		}else if (dealerScore === 21){
 			console.log('Dealer Wins')
 		}
-	}
+	//}
 
 	
 		for (i=0; i<playerHand.length;i++){
@@ -105,57 +112,105 @@ var dealCards = function(){
 			$d = $('<img class="dealer-cards">').attr('src',dealerHand[i].cardImg)
 			$('.dealer-hand').append($d)
 		}
-			console.log('player hand',playerHand)
-			console.log('dealer hand',dealerHand)
-
-		// console.log(playerHand)
-		// console.log(dealerHand)
-		// console.log(shuffleDeck)
+			// console.log('player hand',playerHand)
+			// console.log('dealer hand',dealerHand)
 	})
 }
 dealCards()
 
 
-var Game = function(){
-	this.render = function(){
-	
-		// for (i=0; i<playerHand.length;i++){
-		// 	$p = $('<img class="player-cards">').attr('src',playerHand[i].cardImg)
-		// 	$('.player-hand').append($p)
-		// }
-		// for (i=0; i<dealerHand.length;i++){
-		// 	$d = $('<img class="dealer-cards">').attr('src',dealerHand[i].cardImg)
-		// 	$('.dealer-hand').append($d)
-		// }
-			console.log('player hand',playerHand)
-			console.log('dealer hand',dealerHand)
+// var Game = function(){
+// 	this.render = function(){
 
-	}
+// 			console.log('player hand',playerHand)
+// 			console.log('dealer hand',dealerHand)
+// 	}
+// }
+
+// var game = new Game()
+// game.render()
+
+
+// playAgain
+
+var playAgain = function(){
+	  playerHand = []
+		dealerHand = []
+		$('.dealer-hand').empty()
+		$('.player-hand').empty()
+		$('.dealer-score').empty()
+		$('.player-score').empty()
+		$('.modal').addClass('hidden')
+		$('.hit-button').prop('disabled', false)
+		$('.increase-bet').prop('disabled', false)
+		$('.decrease-bet').prop('disabled', false)
+		$('.deal-cards').prop('disabled', false)
+}
+$('#close').on('click',function(){
+	playAgain()
+})
+
+var playerWin = function(){
+	(money += betValue)
+	$('.modal').removeClass('hidden')
+	$('.winner-message').text('Player Wins')
 }
 
-var game = new Game()
-game.render()
+var playerBust = function(){
+	$('.modal').removeClass('hidden')
+	$('.winner-message').text('Player Busted, Dealer Wins')
+	console.log('busted')
+	$('.hit-button').prop('disabled', true)
+}
 
+var dealerWins = function(){
+	$('.modal').removeClass('hidden')
+	$('.winner-message').text('Dealer Wins')
+}
+
+var dealerBusts = function(){
+	(money += betValue)
+	$('.modal').removeClass('hidden')
+	$('.winner-message').text('Dealer Busted, Player Wins')
+	console.log('busted')
+	$('.hit-button').prop('disabled', true)
+}
+
+var playerBlackjack = function(){
+	(money += betValue * 2.5)
+	//reset game
+	$('.modal').removeClass('hidden')
+	$('.winner-message').text('Player got BlackJack')
+}
+
+var dealerBlackjack = function(){
+	//reset game
+	$('.modal').removeClass('hidden')
+	$('.winner-message').text('Dealer got BlackJack')
+}
+
+var gamePush = function(){
+	$('.modal').removeClass('hidden')
+	$('.winner-message').text('Push, try again')
+}
 
 
 
 var playerScore = function(){
 	var score = 0
-	for (i=0; i< playerHand.length;i++){
+	for (var i=0; i< playerHand.length;i++){
 		score+=(parseInt(playerHand[i].cardValue))
 		
-		function hasValue(obj, key, value) {
-    if (obj.hasOwnProperty('A') && playerScore > 21){
-    	playerScore -= 10
-    }
-}	
-
-
+		// function hasValue(obj, key, value) {
+  //   if (obj.hasOwnProperty('A') && playerScore > 21){
+  //   	playerScore -= 10
+  //   }
+//}	
 // 		if (playerHand.prototype.contains(cardNumber["A"]) && score >21){
 // 			playerHand[i].cardValue = 1
 // 	}
  }
-	console.log('player score', score)
+ 	console.log('player score', score)
 	return score
 }
 playerScore()
@@ -163,7 +218,7 @@ playerScore()
 
 var dealerScore = function(){
 	var score = 0
-	for (i=0; i< dealerHand.length;i++){
+	for (var i=0; i< dealerHand.length;i++){
 		score+=(parseInt(dealerHand[i].cardValue))
 	// 	if (dealerHand.prototype.contains(cardNumber['A']) && score >21){
 	// 		dealerHand[i].cardValue = 1
@@ -175,37 +230,37 @@ var dealerScore = function(){
 dealerScore()
 
 var winner = function(){
-	if (playerScore ()> dealerScore()){
+	 if (playerScore() > dealerScore() && playerScore() <= 21){
 		console.log('player wins')
-		$('#modal').modal('show')
-		$('.winner-message').text("You won")
-	}else if (playerScore ()=== dealerScore()){
+			playerWin()
+//		$('#modal').modal('show')
+//		$('.winner-message').text("You won")
+	}else if (playerScore() === dealerScore()){
 		console.log('push')
-	}else if (dealerScore ()> playerScore()){
+			gamePush()
+	}else if (dealerScore () > playerScore() && dealerScore() <=21){
 		console.log('dealer wins')
+			dealerWins()
 	}
 }
-winner()
 
 
-var playerHit = function(playerScore){
+
+var playerHit = function(){
 	
-
 	$('.hit-button').each(function(){
 		$(this).on('click',function(){
-//	console.log('click')
 		playerHand.push(shuffleDeck[0])
-//			shuffleDeck[0] += playerScore() 
-			shuffleDeck.shift()
-			$p = $('<img class="player-cards">').attr('src',playerHand[i].cardImg)
+			$p = $('<img class="player-cards">').attr('src',shuffleDeck[0].cardImg)
 			$('.player-hand').append($p)
-			var score = dealerScore()
-			for (i=0; i<playerHand.length;i++){
-				if (playerScore(playerHand) > 21){
-					return "Player Bust"
+			shuffleDeck.shift()
 
-				}else {
-					return playerScore
+			$('.player-score').text("You have: "+ playerScore())
+	
+			if (playerScore() > 21){
+			 	playerBust()
+			}else if (playerScore () === 21){
+				playerBlackjack()
 			}
 
 //Ace = 11 or 1
@@ -215,50 +270,40 @@ var playerHit = function(playerScore){
 //					playerScore += (parseInt(playerHand[i].cardValue)
 		// }
   //   }
-	}
-
-	})
-})
-}
-playerHit(playerScore)
-
-
-var playerStay = function(){
-	$('.stay-button').on('click', function(){
-		//end player turn
-	$('.hit-button').prop('disabled', true)
+		})
 
 	})
 }
 
-var dealerPlay = function(dealerScore){
-	$('.stay-button').on('click', function(){
-		if (dealerScore() <=16){
+playerHit()
+
+
+//var dealerPlay = function(dealerScore){
+$('.stay-button').on('click', function(){
+
+	while (dealerScore() <=16){
 			dealerHand.push(shuffleDeck[0])
-			shuffleDeck.shift()
-			$d = $('<img class="dealer-cards">').attr('src',dealerHand[i].cardImg)
+			$d = $('<img class="dealer-cards">').attr('src',shuffleDeck[0].cardImg)
 			$('.dealer-hand').append($d)
-		}else{
-			for (i=0; i<playerHand.length;i++){
-				if (playerScore(playerHand) > 21){
-					return "Dealer Bust"
-			return dealerScore
+			shuffleDeck.shift()
+
+			$('.dealer-score').text("Dealer has: "+ dealerScore())
 		}
-	}
-}
-	})
-}
-dealerPlay(dealerScore)
+				if (dealerScore() >16 && dealerScore() <=21){
+					winner()
+				}else if(dealerScore() > 21){
+					console.log( "Dealer Bust")
+					dealerBusts()				
+				}else if( dealerScore() === 21){
+					dealerBlackjack()
+				}
+		})
+
+//}
+//dealerPlay(dealerScore)
 
 
 // create modal
-
-
-var playAgain = function(){
-
-}
-
-
 //bet not working
 //functions pushing to html
 	//new bet
