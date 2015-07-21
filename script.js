@@ -241,8 +241,7 @@ var winner = function(){
 
 
 
-var playerHit = function(){
-	
+var playerHit = function(){	
 	$('.hit-button').each(function(){
 		$(this).on('click',function(){
 		playerHand.push(shuffleDeck[0])
@@ -264,9 +263,7 @@ var playerHit = function(){
 playerHit()
 
 
-//var dealerPlay = function(dealerScore){
 $('.stay-button').on('click', function(){
-
 	while (dealerScore() <=16){
 			dealerHand.push(shuffleDeck[0])
 			$d = $('<img class="dealer-cards">').attr('src',shuffleDeck[0].cardImg)
