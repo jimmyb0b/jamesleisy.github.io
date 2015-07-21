@@ -44,39 +44,39 @@ var randomizedDeck = function(){
 			shuffling = Math.floor(Math.random()* this.deck.length)
 			shuffleDeck.push(deck[shuffling])
 		}		
-//		console.log(shuffleDeck)
 	}
  randomizedDeck()
 
-// var money = 1000
-
-// var account = function(money){
-// //	for (i=0;i<parseInt(money);i++){
-//  		$('.bank').text("You have $"+money)
-// //	}
-// }
-// account(money)
-
 	$('.increase-bet').on('click', function(){
+		if (money> 0){
 			betValue += 10
 			money -= 10
-	$('.bank').text("You have $"+money)		
-	$('.bet-value').text("Your bet is $"+ betValue)
+		$('.bank').text("You have $"+money)		
+		$('.bet-value').text("Your bet is $"+ betValue)
+		}
+	})
+	
+	$('.decrease-bet').on('click', function(){			
+		if (betValue > 0){
+			betValue -= 10
+			money += 10
+		$('.bank').text("You have $"+money)		
+		$('.bet-value').text("Your bet is $"+ betValue)
+		}
 	})
 
 
 	$('.card-deck').append('<img class="card-stack" src="http://patentimages.storage.googleapis.com/USD490860S1/USD0490860-20040601-D00000.png">')
 
 
-
 var dealCards = function(){
-		$('.deal-cards').on('click',function(){
+	$('.deal-cards').on('click',function(){
+		if (betValue > 0){
 			$('.hit-button').prop('disabled', false)
 			$('.stay-button').prop('disabled', false)
 			$('.increase-bet').prop('disabled', true)
 			$('.decrease-bet').prop('disabled', true)
-//				var startDeal = 2
-//			for (var i=0; i<startDeal.length; i++){
+
 			playerHand.push(shuffleDeck[0])
 				shuffleDeck.shift()
 			dealerHand.push(shuffleDeck[0])
@@ -85,6 +85,7 @@ var dealCards = function(){
 				shuffleDeck.shift()
 			dealerHand.push(shuffleDeck[0])
 				shuffleDeck.shift()
+
 			$('.deal-cards').prop('disabled', true)
 			$('.increase-bet').prop('disabled', true)
 //player score count
@@ -101,37 +102,26 @@ var dealCards = function(){
 		}else if (dealerScore === 21){
 			console.log('Dealer Wins')
 		}
-	//}
-
 	
 		for (i=0; i<playerHand.length;i++){
 			$p = $('<img class="player-cards">').attr('src',playerHand[i].cardImg)
 			$('.player-hand').append($p)
 		}
+
 		for (i=0; i<dealerHand.length;i++){
 			$d = $('<img class="dealer-cards">').attr('src',dealerHand[i].cardImg)
 			$('.dealer-hand').append($d)
 		}
 			// console.log('player hand',playerHand)
 			// console.log('dealer hand',dealerHand)
+		}else{
+			alert("You need to make a bet first")
+		}
 	})
 }
+
 dealCards()
 
-
-// var Game = function(){
-// 	this.render = function(){
-
-// 			console.log('player hand',playerHand)
-// 			console.log('dealer hand',dealerHand)
-// 	}
-// }
-
-// var game = new Game()
-// game.render()
-
-
-// playAgain
 
 var playAgain = function(){
 	  playerHand = []
@@ -141,17 +131,21 @@ var playAgain = function(){
 		$('.dealer-score').empty()
 		$('.player-score').empty()
 		$('.modal').addClass('hidden')
-		$('.hit-button').prop('disabled', false)
+		$('.hit-button').prop('disabled', true)
+		$('.stay-button').prop('disabled', true)
 		$('.increase-bet').prop('disabled', false)
 		$('.decrease-bet').prop('disabled', false)
 		$('.deal-cards').prop('disabled', false)
+		money-=betValue
+		$('.bank').text("You have $"+money)
 }
 $('#close').on('click',function(){
 	playAgain()
 })
 
 var playerWin = function(){
-	(money += betValue)
+	money += betValue*2
+	$('.bank').text("You have $"+money)
 	$('.modal').removeClass('hidden')
 	$('.winner-message').text('Player Wins')
 }
@@ -169,7 +163,8 @@ var dealerWins = function(){
 }
 
 var dealerBusts = function(){
-	(money += betValue)
+	money += betValue*2
+	$('.bank').text("You have $"+money)
 	$('.modal').removeClass('hidden')
 	$('.winner-message').text('Dealer Busted, Player Wins')
 	console.log('busted')
@@ -177,7 +172,8 @@ var dealerBusts = function(){
 }
 
 var playerBlackjack = function(){
-	(money += betValue * 2.5)
+	money += betValue *2.5
+	$('.bank').text("You have $"+money)
 	//reset game
 	$('.modal').removeClass('hidden')
 	$('.winner-message').text('Player got BlackJack')
@@ -190,6 +186,8 @@ var dealerBlackjack = function(){
 }
 
 var gamePush = function(){
+	money+=betValue
+	$('.bank').text("You have $"+money)
 	$('.modal').removeClass('hidden')
 	$('.winner-message').text('Push, try again')
 }
@@ -197,35 +195,34 @@ var gamePush = function(){
 
 
 var playerScore = function(){
-	var score = 0
+	var pscore = 0
 	for (var i=0; i< playerHand.length;i++){
-		score+=(parseInt(playerHand[i].cardValue))
-		
-		// function hasValue(obj, key, value) {
-  //   if (obj.hasOwnProperty('A') && playerScore > 21){
-  //   	playerScore -= 10
-  //   }
-//}	
-// 		if (playerHand.prototype.contains(cardNumber["A"]) && score >21){
-// 			playerHand[i].cardValue = 1
-// 	}
- }
- 	console.log('player score', score)
-	return score
+		pscore+=(parseInt(playerHand[i].cardValue))
+		}
+		for (var i=0; i<playerHand.length;i++){
+			if (playerHand[i].cardNumber === 'A' && pscore >= 21){
+				pscore -= 10
+			}
+	}
+
+ 	console.log('player score', pscore)
+	return pscore
 }
 playerScore()
 
 
 var dealerScore = function(){
-	var score = 0
+	var dscore = 0
 	for (var i=0; i< dealerHand.length;i++){
-		score+=(parseInt(dealerHand[i].cardValue))
-	// 	if (dealerHand.prototype.contains(cardNumber['A']) && score >21){
-	// 		dealerHand[i].cardValue = 1
-	// }
+		dscore+=(parseInt(dealerHand[i].cardValue))
+			}
+		for (var i=0; i<dealerHand.length;i++){
+			if (dealerHand[i].cardNumber === 'A' && dscore >= 21){
+				score-= 10
+	}
 }
-	console.log('dealer score', score)
-	return score
+	console.log('dealer score', dscore)
+	return dscore
 }
 dealerScore()
 
@@ -233,8 +230,6 @@ var winner = function(){
 	 if (playerScore() > dealerScore() && playerScore() <= 21){
 		console.log('player wins')
 			playerWin()
-//		$('#modal').modal('show')
-//		$('.winner-message').text("You won")
 	}else if (playerScore() === dealerScore()){
 		console.log('push')
 			gamePush()
@@ -262,16 +257,7 @@ var playerHit = function(){
 			}else if (playerScore () === 21){
 				playerBlackjack()
 			}
-
-//Ace = 11 or 1
-		// function hasValue() {
-  //   if (playerHand.obj.hasOwnProperty('A') && playerScore() > 21){
-  //   	playerScore -= 10
-//					playerScore += (parseInt(playerHand[i].cardValue)
-		// }
-  //   }
 		})
-
 	})
 }
 
@@ -289,27 +275,18 @@ $('.stay-button').on('click', function(){
 
 			$('.dealer-score').text("Dealer has: "+ dealerScore())
 		}
-				if (dealerScore() >16 && dealerScore() <=21){
+				if( dealerScore() === 21){
+					dealerBlackjack()
+				}else if (dealerScore() >16 && dealerScore() <=21){
 					winner()
 				}else if(dealerScore() > 21){
 					console.log( "Dealer Bust")
-					dealerBusts()				
-				}else if( dealerScore() === 21){
-					dealerBlackjack()
-				}
+					dealerBusts()
+				}					
 		})
 
-//}
-//dealerPlay(dealerScore)
 
 
-// create modal
-//bet not working
-//functions pushing to html
-	//new bet
-	//player score
-//Ace both 11 & 1
-//Game resets after winner declared
 
 
 

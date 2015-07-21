@@ -93,17 +93,32 @@
 .dealer-hand{
 	display:inline-block;
 	margin:10px;
-    position: absolute;
-   	top: 75px;
-    right: 125px;
+  position: absolute;
+  top: 75px;
+  right: 125px;
 	height:175px; 
 
+}
+
+.card-cover{
+	position: absolute;
+	top: 75px;
+  right: 100px;
+  width: 50px;
+	height:175px;
+	margin:10px; 
+	z-index: 50;
+
+}
+
+.hide-card{
+	display: none;
 }
 
 .dealer-cards{
 	height: 100%;
 	width: relative;
-	margin: 5px
+	margin: 2px
 }
 
 .player-hand{
@@ -111,14 +126,14 @@
 	margin:10px;
 	position: absolute;
 	bottom: 100px;
-    right: 125px;
+  right: 125px;
 	height:175px;
 }
 
 .player-cards{
 	height: 100%;
 	width: relative;
-	margin: 5px
+	margin: 2px
 }
 
 .bank {
